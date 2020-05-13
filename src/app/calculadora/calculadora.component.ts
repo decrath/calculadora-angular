@@ -7,28 +7,27 @@ import { Component } from '@angular/core';
 })
 export class CalculadoraComponent {
 
-  result: string = '';
-  longButtons: string[] = ['AC', 'CE'];
-  buttons: string[] = ['7', '8', '9', '/', '4', '5', '6', '*', '1', '2', '3', '-', '.', '0', '=', '+'];
+  resultado: string = '';
+  botonesLargos: string[] = ['AC', 'CE'];
+  botones: string[] = ['7', '8', '9', '/', '4', '5', '6', '*', '1', '2', '3', '-', '.', '0', '=', '+'];
 
-  private preValue: string = '';
-  private curValue: string = '';
+  private valorPrevio: string = '';
+  private secuenciaDeValores: string = '';
   
-  addToExpression(value: string) {
-    if ( this.result != '' ) {
-      this.preValue = this.curValue;
-      this.curValue = value;
+  agregarExpresion(valor: string) {
+    if ( this.resultado != '' ) {
+      this.valorPrevio = this.secuenciaDeValores;
+      this.secuenciaDeValores = valor;
     }
 
-    if (value == 'AC'){
-      this.result = '';
-    } else if (value == 'CE') {
-      this.result = this.preValue != '=' ? this.result.slice(0, -1) : this.result;
-    } else if (value == '=') {
-      this.result = eval(this.result);
+    if (valor == 'AC') {
+      this.resultado = '';
+    } else if (valor == 'CE') {
+      this.resultado = this.valorPrevio != '=' ? this.resultado.slice(0, -1) : this.resultado;
+    } else if (valor == '=') {
+      this.resultado = eval(this.resultado);
     } else {
-      this.result += value;
-
+      this.resultado += valor;
     }
   }
  
